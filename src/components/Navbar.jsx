@@ -61,7 +61,6 @@ const MenuItem = styled.div`
 const Navbar = () => {
   return (
     <Container>
-      <Announcement />
       <Wrapper>
         <Left>
           <Language>EN</Language>
