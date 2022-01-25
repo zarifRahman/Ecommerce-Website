@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
@@ -32,6 +33,12 @@ const Option = styled.option`
 `
 
 const ProductList = () => {
+  // grab woman from url
+  const location = useLocation();
+  console.log(location.pathname.split('/')[2]);
+  const category =  location.pathname.split('/')[2];
+
+
   return (
   <Container>
     <Navbar />
