@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Announcement from '../components/Announcement';
@@ -38,6 +38,18 @@ const ProductList = () => {
   console.log(location.pathname.split('/')[2]);
   const category =  location.pathname.split('/')[2];
 
+  // filter
+  const [filters,setFilters] = useState({});
+  const handleFilter = (e) => {
+    setFilters({
+      // with using ...filter operator both size and color object will update
+      ...filters,
+      [e.target.name] : e.target.value
+    })
+  }
+  console.log({filters});
+  const [sort,setSort] = useState('Newest');
+
 
   return (
   <Container>
@@ -48,7 +60,7 @@ const ProductList = () => {
       {/* Product filter */}
       <Filter>
         <FilterText>Filter Product</FilterText>
-        <Select>
+        <Select name="color" onChange={handleFilter}>
           <Option disabled select>
             Color
           </Option>
@@ -59,7 +71,7 @@ const ProductList = () => {
           <Option>Yellow</Option>
           <Option>Green</Option>
         </Select>
-        <Select>
+        <Select name="size" onChange={handleFilter}>
           <Option disabled select>
             Size
           </Option>
@@ -74,15 +86,15 @@ const ProductList = () => {
       <Filter>
         <FilterText>Sort Product</FilterText>
         <Select>
-          <Option selected>
+          <Option onChange={(e)=> e.target.value}>
             Newest
           </Option>
-          <Option>Price (asc)</Option>
-          <Option>Price (desc)</Option>
+          <Option value={"Price (asc)"}>Price (asc)</Option>
+          <Option value={"Price (desc)"}>Price (desc)</Option>
         </Select>
       </Filter>
     </FilterContainer>
-    <Products />
+    <Products cat={category} filters={filters} sort={sort}/>
     <Newsletter />
     <Footer />
   </Container>);

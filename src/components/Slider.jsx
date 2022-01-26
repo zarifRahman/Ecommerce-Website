@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import logo from '../images/cloth1.png'; // relative path to image
 import { sliderItems } from "../data";
+import { mobile } from "../responsive";
 
 
 const Container = styled.div`
@@ -12,6 +13,7 @@ const Container = styled.div`
   position: relative;
   /* slider */
   overflow: hidden;
+  ${mobile({ display: 'none' })}
 `;
 const Arrow = styled.div`
   width: 50px;
